@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "Wireless Headphones",
+    "description": "Noise-canceling over-ear headphones with Bluetooth connectivity.",
+    "price": 99.99
+  },
+  {
+    "id": 2,
+    "name": "Smartphone",
+    "description": "Latest model smartphone with a high-resolution display and powerful camera.",
+    "price": 799.99
+  },
+  {
+    "id": 3,
+    "name": "Laptop",
+    "description": "Lightweight laptop with a fast processor and long battery life.",
+    "price": 1299.99
+  },
+  {
+    "id": 4,
+    "name": "Gaming Mouse",
+    "description": "Ergonomic gaming mouse with customizable buttons and RGB lighting.",
+    "price": 49.99
+  },
+  {
+    "id": 5,
+    "name": "Smartwatch",
+    "description": "Feature-packed smartwatch with heart rate monitoring and GPS.",
+    "price": 199.99
+  }
+]
