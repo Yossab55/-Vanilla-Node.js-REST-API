@@ -1,5 +1,5 @@
 const Product = require("../models/productModel");
-const { getPostData } = require("../utils");
+const { getPostData, writeToFile } = require("../utils");
 
 //@desc get all products
 //@route Get api/products
@@ -50,8 +50,37 @@ async function createProduct(request, response) {
     console.log(error);
   }
 }
+
+//@desc Update product
+//@route PUT api/products/:id
+async function updateProduct(request, response, id) {
+  try {
+    const product = await Product.findProductById(id);
+    if(product) {
+      const body = await getPostData(request);
+      const { name, description, price} = JSON.parse(body);
+
+      const updatedProduct = {
+        id: product.id,
+        name: name || product.name,
+        description: description || product.description,
+        price: price || product.description,
+      }
+
+      const newProduct = await Product.update(updatedProduct);
+      response.writeHead(201, {"Content-Type": "application/json"});
+      response.end(JSON.stringify(newProduct));
+    } else {
+      response.writeHead(404, {"Content-Type" : "application/json"});
+      response.end({"message": "id is wrong"})
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
 module.exports = {
   getProducts,
   getProduct,
   createProduct,
+  updateProduct
 };

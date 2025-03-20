@@ -32,8 +32,26 @@ function create(product) {
     resolve(newProduct);
   })
 }
+function update(product) {
+  return new Promise((resolve, reject) => {
+    let updatedProduct;
+    for(let i = 0; i < products.length; i++) {
+
+      if(products[i].id == product.id) {
+        updatedProduct = product
+        products[i] = product;
+        break;
+      }
+    }
+
+    writeToFile("data/products.json", products);
+    resolve(updatedProduct);
+  })
+}
+
 module.exports = {
   findAll,
   findProductById,
-  create
+  create,
+  update
 };
