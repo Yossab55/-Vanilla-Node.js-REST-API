@@ -1,7 +1,7 @@
 {
   "name": "project_002_vanilla_node.js_restapi",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "node serve.js",
     "dev": "nodemon serve.js"
