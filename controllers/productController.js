@@ -67,8 +67,30 @@ async function updateProduct(request, response, id) {
       };
 
       const updatedProduct = await Product.update(id, productDate);
-      response.writeHead(201, { "Content-Type": "application/json" });
+      response.writeHead(200, { "Content-Type": "application/json" });
       response.end(JSON.stringify(updatedProduct));
+    } else {
+      response.writeHead(404, { "Content-Type": "application/json" });
+      response.end({ message: "id is wrong" });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+//@desc delete product
+//@route DELETE api/products/:id
+async function deleteProduct(request, response, id) {
+  try {
+    const product = await Product.findProductById(id);
+    if (product) {
+      // const deletedProduct = await Product.remove(id, product);
+      // response.writeHead(201, { "Content-Type": "application/json" });
+      // response.end(JSON.stringify(deletedProduct));
+      //# another solution
+      await Product.remove(id, product);
+      response.writeHead(201, { "Content-Type": "application/json" });
+      response.end(JSON.stringify({message: `product with ${id} is removed`}));
     } else {
       response.writeHead(404, { "Content-Type": "application/json" });
       response.end({ message: "id is wrong" });
@@ -82,4 +104,5 @@ module.exports = {
   getProduct,
   createProduct,
   updateProduct,
+  deleteProduct,
 };

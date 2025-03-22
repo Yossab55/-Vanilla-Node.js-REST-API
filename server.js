@@ -19,6 +19,12 @@ const server = http.createServer((request, response) => {
   ) {
     const id = request.url.split("/")[3];
     ProductController.updateProduct(request, response, id)
+  } else if (
+    request.url.match(/^\/api\/products\/(\d+)$/) &&
+    request.method == "DELETE"
+  ) {
+    const id = request.url.split("/")[3];
+    ProductController.deleteProduct(request, response, id)
   } else {
     response.writeHead(404, { "Content-Type": "application/json" });
     response.end(JSON.stringify({ error: "404 Not Found :(" }));
