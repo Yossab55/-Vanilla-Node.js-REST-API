@@ -56,31 +56,30 @@ async function createProduct(request, response) {
 async function updateProduct(request, response, id) {
   try {
     const product = await Product.findProductById(id);
-    if(product) {
+    if (product) {
       const body = await getPostData(request);
-      const { name, description, price} = JSON.parse(body);
+      const { name, description, price } = JSON.parse(body);
 
-      const updatedProduct = {
-        id: product.id,
+      const productDate = {
         name: name || product.name,
         description: description || product.description,
         price: price || product.description,
-      }
+      };
 
-      const newProduct = await Product.update(updatedProduct);
-      response.writeHead(201, {"Content-Type": "application/json"});
-      response.end(JSON.stringify(newProduct));
+      const updatedProduct = await Product.update(id, productDate);
+      response.writeHead(201, { "Content-Type": "application/json" });
+      response.end(JSON.stringify(updatedProduct));
     } else {
-      response.writeHead(404, {"Content-Type" : "application/json"});
-      response.end({"message": "id is wrong"})
+      response.writeHead(404, { "Content-Type": "application/json" });
+      response.end({ message: "id is wrong" });
     }
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 }
 module.exports = {
   getProducts,
   getProduct,
   createProduct,
-  updateProduct
+  updateProduct,
 };

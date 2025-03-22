@@ -32,14 +32,14 @@ function create(product) {
     resolve(newProduct);
   })
 }
-function update(product) {
+function update(id, product) {
   return new Promise((resolve, reject) => {
     let updatedProduct;
     for(let i = 0; i < products.length; i++) {
 
-      if(products[i].id == product.id) {
+      if(products[i].id == id) {
         updatedProduct = product
-        products[i] = product;
+        products[i] = {id, ...product};
         break;
       }
     }
